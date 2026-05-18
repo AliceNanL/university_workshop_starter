@@ -1,0 +1,38 @@
+
+sources:
+  - name: jaffle_shop
+    database: dbt-learning-path-496700
+    schema: dbt_nanli_raw
+    tables:
+      - name: raw_customers
+        columns:
+          - name: id
+            data_tests:
+                - unique
+                - not_null
+      - name: raw_items
+        columns:
+          - name: id
+            data_tests:
+              - unique
+              - not_null
+      - name: raw_orders
+        columns:
+          - name: id
+            data_tests:
+              - unique
+              - not_null
+      - name: raw_products
+        columns:
+          - name: sku
+            data_tests:
+              - unique
+              - not_null      
+      - name: raw_stores
+        columns:
+          - name: id
+            data_tests:
+              - unique
+              - not_null
+
+      - name: raw_supplies
