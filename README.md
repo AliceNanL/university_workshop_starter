@@ -44,15 +44,34 @@ The GitHub project README should be updated with:
 Bonus: You may choose to also submit links to a dashboard (can be screenshots), SQL queries in BigQuery, or a Python notebook that tells the story.
 
 
-## Updates
+## Project Summary
 
-1. **Primary questrion**:
-   - 
-   - 
+1. **Primary question**:
+   - Which customers have the highest lifetime revenue to date, and how often do they buy compared with the average customer?
 
+2. **Metric definition**:
+   - Lifetime value = total order revenue per customer across all recorded orders.
+   - Order count = number of orders placed by each customer.
+   - Average order value = lifetime value divided by order count.
+   - The mart is built in [models/marts/fct_customer_lifetime_value.sql](models/marts/fct_customer_lifetime_value.sql).
 
-2. **Key Insights**
-   - 
+3. **Example query**:
+   ```sql
+   select
+       customer_id,
+       customer_name,
+       lifetime_value,
+       order_count,
+       average_order_value
+   from {{ ref('fct_customer_lifetime_value') }}
+   order by lifetime_value desc
+   limit 10;
+   ```
 
-3. **Suggested Next Steps**
-   - 
+4. **Key Insights**
+   - The new mart summarizes each customer by lifetime value, order count, first and last order date, and average order value.
+   - This creates a simple customer lifetime value view that can be used to identify high-value customers and compare them against the broader customer base.
+
+5. **Suggested Next Steps**
+   - Add a segment such as high-value, repeat, or at-risk customers based on lifetime value and order frequency.
+   - Explore whether customers with more orders also have higher average basket size or spend per order.

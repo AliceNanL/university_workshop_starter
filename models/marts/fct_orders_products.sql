@@ -8,5 +8,5 @@ select
      product_price,
      product_description
 
-from {{ ref('fct_orders_items') }} as orders_items
+from {{ ref('int_order_items') }} as orders_items
 left join {{ ref('stg_products') }} as products using (sku)

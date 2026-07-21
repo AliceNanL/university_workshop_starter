@@ -1,0 +1,7 @@
+version: 2
+
+models:
+- name: int_order_items
+  description: >
+    intermediate table at order-item grain, joining orders with their products(including sku) and customer id
+    One row per item within an order.
