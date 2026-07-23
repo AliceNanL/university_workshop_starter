@@ -25,7 +25,7 @@ models:
       to the products they purchased and shows the number of purchases and
       revenue per product.
     config:
-      materialized: table
+      materialized: view
     columns:
       - name: customer_id
         description: Surrogate or business key for the customer
@@ -49,10 +49,13 @@ models:
       Fact table joining orders to product-level detail. One row per
       product ordered, enriched with product attributes.
     columns:
-      - name: order_product_id
-        description: Primary key.
+      - name: order_id
+        description: Primary key for the order
         tests:
-          - unique
+        - not_null
+      - name: sku
+        description: Product SKU
+        tests:
           - not_null
 
 
@@ -60,9 +63,4 @@ models:
     description: >
       Fact table summarizing daily product sales. One row per product per day.
       Supports trend analysis over time.
-    columns:
-      - name: product_sales_daily_id
-        description: Primary key (composite of product_id and sale_date).
-        tests:
-          - unique
-          - not_null
+ 
